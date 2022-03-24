@@ -8,3 +8,9 @@ gem 'standalone_migrations'
 
 # Use postgress database
 gem 'pg'
+
+# Use Roda for routing tree web toolkit
+gem 'roda'
+
+# Implementation of the JSON specification
+gem 'json'
