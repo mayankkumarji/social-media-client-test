@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username:
+  password:
+  pool: 5
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: social_media_db_dev
+
+test: &test
+  <<: *default
+  database: social_media_db_test
+
+production:
+  <<: *default
+  database: social_media_db_prod

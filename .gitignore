@@ -1,0 +1,2 @@
+# Ignore database credentials and more.
+/db/database.yml

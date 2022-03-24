@@ -1,0 +1,4 @@
+db:
+  seeds: db/seeds.rb
+config:
+  database: db/database.yml
