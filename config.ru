@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'roda'
 require './app/main'
-
 class App < Roda
   route do |r|
     # GET /login request

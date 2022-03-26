@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_record'
+require 'byebug'
 require_relative './models/user'
 require_relative './models/post'
 require_relative './models/rating'
