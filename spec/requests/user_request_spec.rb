@@ -21,7 +21,7 @@ RSpec.describe 'User authentication', type: :request do
         api.get('/login?username=admin&password=nil')
       end
 
-      it 'returns correct response' do
+      it 'returns error response' do
         expect(api.body['status']).to eq(404)
         expect(api.body['message']).to eq('Login failed!')
       end

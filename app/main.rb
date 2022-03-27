@@ -6,6 +6,7 @@ require_relative './models/user'
 require_relative './models/post'
 require_relative './models/rating'
 require_relative './models/feedback'
+require_relative './services/jwt_web_token'
 
 # Database connection
 def db_configuration
