@@ -34,3 +34,6 @@ gem 'byebug'
 
 # factory_bot is a fixtures for testing with rspec
 gem 'factory_bot'
+
+# for generate multiple record through seed file
+gem 'faker'
