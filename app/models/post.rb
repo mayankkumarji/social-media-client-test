@@ -52,9 +52,16 @@ class Post < ActiveRecord::Base
     params
   end
 
-  # check if auther exists and return auther
+  # Check if auther exists and return auther
   def self.check_auther(user_id)
     auther = User.find_by(username: user_id)
     User.find_by(id: user_id) if auther.blank?
+  end
+
+  # Listing of Auther with IP
+  def self.list_users
+    Post.joins(:author)
+        .map { |post| { user_id: post.user_id, post_id: post.id, username: post.author.username, ip: post.auther_ip } }
+        .compact
   end
 end

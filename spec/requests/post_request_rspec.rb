@@ -65,4 +65,21 @@ RSpec.describe 'Post authentication', type: :request do
       end
     end
   end
+
+  describe 'GET Post Auther with IP' do
+    api = ClientApi::Api.new
+    api.get('/login?username=admin&password=pass')
+    token = api.body['token']
+    context 'with valid attribute values' do
+      before do
+        header = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authentication': token }
+        api.get_with_body('/posts/list_users', {}, header)
+      end
+
+      it 'returns correct response' do
+        expect(api.status).to eq(200)
+        expect(api.body).to be_an_instance_of(Array)
+      end
+    end
+  end
 end

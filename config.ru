@@ -41,6 +41,16 @@ class App < Roda
         end
       end
 
+      # /list_users request
+      r.get 'list_users' do
+        if auth[:status] == 200
+          list_users_response = Post.list_users
+          list_users_response.to_json
+        else
+          { error: 'Authentication error!', status: 422 }.to_json
+        end
+      end
+
       # :post_id/ratings request
       r.on Integer, 'ratings' do |post_id|
         post = post_id
