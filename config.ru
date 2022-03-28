@@ -64,6 +64,20 @@ class App < Roda
           end
         end
       end
+
+      # :post_id/feedbacks request
+      r.on Integer, 'feedbacks' do |post_id|
+        post = post_id
+        # create feedback for the post
+        r.post 'create' do
+          if auth[:status] == 200
+            feedback_response = Feedback.create_feedback(params: body, post: post)
+            feedback_response.to_json
+          else
+            { error: 'Authentication error!', status: 422 }.to_json
+          end
+        end
+      end
     end
   end
 end
