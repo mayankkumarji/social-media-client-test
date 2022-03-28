@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   has_many :ratings
   has_many :feedbacks
 
-  # create new post
+  # Create new post
   def self.create_post(params: nil, auth: nil)
     params = validate_auther(params, auth)
     post = check_exiting_post(params)
@@ -19,6 +19,13 @@ class Post < ActiveRecord::Base
     else
       { status: 422, message: 'Failed to create post!' }
     end
+  end
+
+  # Get top Post ordered by rating
+  def self.top_post
+    posts = Post.joins(:ratings).select('posts.id, posts.title, posts.content, ratings.rate as average_rate')
+
+    posts.order(:average_rate)
   end
 
   def self.check_exiting_post(params)
