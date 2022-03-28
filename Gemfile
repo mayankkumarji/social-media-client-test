@@ -37,3 +37,11 @@ gem 'factory_bot'
 
 # for generate multiple record through seed file
 gem 'faker'
+
+# for schedule the task of generate excel sheet
+gem 'whenever', require: false
+
+# for generating excel sheet
+gem 'rubyzip'
+gem 'axlsx'
+gem 'axlsx_rails'
