@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-RSpec.describe 'Post authentication', type: :request do
+RSpec.describe 'Post API', type: :request do
   describe 'Create new Post with POST request' do
     api = ClientApi::Api.new
     api.get('/login?username=admin&password=pass')
