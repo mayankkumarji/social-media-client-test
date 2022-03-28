@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :author, class_name: 'User', foreign_key: :user_id
   has_many :ratings
+  has_many :feedbacks
 
   # create new post
   def self.create_post(params: nil, auth: nil)
