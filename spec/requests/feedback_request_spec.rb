@@ -1,16 +1,16 @@
 # frozen_string_literal: true
-
 require 'spec_helper'
 RSpec.describe 'Feedback API', type: :request do
   describe 'Create new Feedback with POST request' do
     api = ClientApi::Api.new
-    api.get('/login?username=admin&password=pass')
+    user_body = { username: 'admin', password: 'pass' }
+    api.post('/login', user_body)
     token = api.body['token']
     user_id = api.body['data']['id']
     context 'with valid attribute values' do
       before do
         post = Post.first
-        body = { 'feedback': { 'comment': 'test', 'user_id': user_id } }
+        body = { 'feedback': { 'comment': 'test', 'user_id': user_id, 'owner_id': user_id } }
         header = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authentication': token }
         api.post("/posts/#{post.id}/feedbacks/create", body, header)
       end

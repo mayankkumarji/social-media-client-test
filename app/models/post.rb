@@ -10,7 +10,9 @@ class Post < ActiveRecord::Base
   # Create new post
   def self.create_post(params: nil, auth: nil)
     params = validate_auther(params, auth)
+    puts params
     post = check_exiting_post(params)
+    puts post
     return post if post.present?
 
     post = Post.new(params['posts'])
@@ -61,7 +63,7 @@ class Post < ActiveRecord::Base
   # Listing of Auther with IP
   def self.list_users
     Post.joins(:author)
-        .map { |post| { user_id: post.user_id, post_id: post.id, username: post.author.username, ip: post.auther_ip } }
+        .map { |post| { user_id: post.user_id, post_id: post.id, username: post.author.username} }
         .compact
   end
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-
 require 'spec_helper'
 RSpec.describe 'Rating API', type: :request do
   describe 'Create new Rating with POST request' do
     api = ClientApi::Api.new
-    api.get('/login?username=admin&password=pass')
+    user_body = { username: 'admin', password: 'pass' }
+    api.post('/login', user_body)
     token = api.body['token']
     user_id = api.body['data']['id']
     context 'with valid attribute values' do

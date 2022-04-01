@@ -2,11 +2,12 @@
 
 require 'spec_helper'
 RSpec.describe 'User authentication', type: :request do
-  describe 'GET /login' do
+  describe 'POST /login' do
     api = ClientApi::Api.new
     context 'with valid attribute values' do
       before do
-        api.get('/login?username=admin&password=pass')
+        body = { username: 'admin', password: 'pass' }
+        api.post('/login', body)
       end
 
       it 'returns correct response' do
@@ -18,7 +19,8 @@ RSpec.describe 'User authentication', type: :request do
 
     context 'with in-valid attribute values' do
       before do
-        api.get('/login?username=admin&password=nil')
+        body = { username: 'admin', password: nil }
+        api.post('/login', body)
       end
 
       it 'returns error response' do

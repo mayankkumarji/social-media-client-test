@@ -4,12 +4,14 @@ require 'spec_helper'
 RSpec.describe 'Post API', type: :request do
   describe 'Create new Post with POST request' do
     api = ClientApi::Api.new
-    api.get('/login?username=admin&password=pass')
+    user_body = { username: 'admin', password: 'pass' }
+    api.post('/login', user_body)
     token = api.body['token']
     user_id = api.body['data']['id']
     context 'with valid attribute values' do
       before do
-        body = { 'posts': { 'title': 'aa', 'content': 'cc', 'user_id': user_id } }
+        body = { 'posts': { 'title': 'aa', 'content': 'cc', 'user_id': user_id, 'auther_ip': user_id } }
+        # puts body
         header = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authentication': token }
         api.post('/posts/create', body, header)
       end
@@ -23,7 +25,7 @@ RSpec.describe 'Post API', type: :request do
 
     context 'with new auther' do
       before do
-        body = { 'posts': { 'title': 'aa', 'content': 'cc', 'user_id': 'abcd' } }
+        body = { 'posts': { 'title': 'aa', 'content': 'cc', 'user_id': user_id, 'auther_ip': user_id } }
         header = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authentication': token }
         api.post('/posts/create', body, header)
       end
@@ -51,7 +53,8 @@ RSpec.describe 'Post API', type: :request do
 
   describe 'GET top Post' do
     api = ClientApi::Api.new
-    api.get('/login?username=admin&password=pass')
+    user_body = { username: 'admin', password: 'pass' }
+    api.post('/login', user_body)
     token = api.body['token']
     context 'with valid attribute values' do
       before do
@@ -68,7 +71,8 @@ RSpec.describe 'Post API', type: :request do
 
   describe 'GET Post Auther with IP' do
     api = ClientApi::Api.new
-    api.get('/login?username=admin&password=pass')
+    user_body = { username: 'admin', password: 'pass' }
+    api.post('/login', user_body)
     token = api.body['token']
     context 'with valid attribute values' do
       before do

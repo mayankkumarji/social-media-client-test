@@ -6,10 +6,11 @@ class App < Roda
   plugin :request_headers
   plugin :default_headers, 'Content-Type'=>'text/json'
   route do |r|
-    # GET /login request
-    r.get 'login' do
-      username = r.params['username']
-      password = r.params['password']
+    # POST /login request
+    r.post 'login' do
+      params = JSON.parse(r.body.read)
+      username = params['username']
+      password = params['password']
       ip = r.ip
       authenticate = User.authentication(username: username, password: password, ip: ip)
       authenticate.to_json
